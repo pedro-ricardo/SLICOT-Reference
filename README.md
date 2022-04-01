@@ -1,5 +1,4 @@
-SLICOT Library Root Directory
------------------------------
+# SLICOT Library Root Directory
 
 SLICOT - Subroutine Library In COntrol Theory - is a general purpose basic
 mathematical library for control theoretical computations.  The library
@@ -70,7 +69,7 @@ The SLICOT Library is built on LAPACK (Linear Algebra PACKage) and BLAS
 (Basic Linear Algebra Subprograms) collections.  Therefore, these
 packages should be available on the platform used.
 
-Basic References:
+## Basic References:
 
 1. P. Benner, V. Mehrmann, V. Sima, S. Van Huffel, and A. Varga,
    "SLICOT - A Subroutine Library in Systems and Control Theory",
@@ -80,3 +79,42 @@ Basic References:
 2. S. Van Huffel, V. Sima, A. Varga, S. Hammarling, and F. Delebecque,
    "Development of High Performance Numerical Software for Control",
    IEEE Control Systems Magazine, Vol. 24, Nr. 1, Feb., pp. 60-76, 2004.
+
+# Dependencies
+
+| Library | Version  |
+|---------|----------|
+| Slicot  | 5.7.0    |
+| Lapack  | **<=** 3.5.0 |
+| GCC     | **>=** 7.5.0 |
+
+## Lapack Instalation
+
+The Lapack [v3.5.0](http://www.netlib.org/lapack/#_lapack_version_3_5_0) library
+coud be installed with the following commands by just changing `$LAPACK_INSTALL_FOLDER`
+to the desired install location.
+
+```shell
+tar -xf lapack-3.5.0.tgz
+cd lapack-3.5.0
+mkdir mybuild
+cd mybuild
+cmake -DCMAKE_INSTALL_PREFIX=$LAPACK_INSTALL_FOLDER -DCMAKE_BUILD_TYPE=RELEASE -DBUILD_SHARED_LIBS=ON ..
+make -j 4
+make install
+```
+
+# Installation
+
+To install Slicot library one could follow these steps and just change `$LAPACK_INSTALL_FOLDER` and 
+`$SLICOT_INSTALL_FOLDER` to the desired locations.
+
+```shell
+git clone https://github.com/pedro-ricardo/Slicot.git
+cd Slicot
+mkdir mybuild
+cd mybuild
+cmake -DBLAS_LIBRARIES=$LAPACK_INSTALL_FOLDER/lib/libblas.so -DLAPACK_LIBRARIES=$LAPACK_INSTALL_FOLDER/lib/liblapack.so -DCMAKE_INSTALL_PREFIX=$SLICOT_INSTALL_FOLDER ..
+make -j 4
+make install
+```
